@@ -1,0 +1,81 @@
+orange = folder, yellow = class/enum/interface
+
+Every APP that you will build must start with some form of problem domain analysis
+
+- ask "what data does my app need to represent?"
+- "what problem does my app need to solve for the user?"
+
+In this lesson, we will build the first few classes for the Sudoku game
+
+- these classes are the foundation of the app as we will build the rest of the application on top of these classes
+- these classes are part of the problemdomain folder
+    - folder structure so far: src → sudoku → problemdomain
+- first, we will build the **virtual representation** of the sudoku game
+    - create a [SudokuGame.java](sudokugame.java) which contains a class under problemdomain folder
+    - the representation of the game has two properties: gameState and gridState
+    - gameState is type ENUM
+    - gridState is type 2d integer array
+    - static int = constant for the grid size, 9
+    - getter for the gridState is written to be immutable by duplicating a copy of the original state because if passed the actual address to whichever object that calls it, it will be able to manipulate the actual gridState, which is something we dont want
+    - we will later create a static utility function to perform this array copy, which protects the actual sudoku object from being manipulated
+    - the SudokuGame class will implement "Serializable" which allows the game to write to an actual file on the operating system
+    - we will also create a [Coordinates.java](coordinates.java) which contains a class under the problem domain folder
+        - this class contains 2 private integer field: x and y
+        - it will also contains some helpful methods which we will touch on after when we write the user interface
+        - also create a constructor to set the private x and y fields and getter methods
+        - equals() method to check if coordinates object are equal; this method will have @Override on top of it (research what this does!!)
+        - we will store the coordinates object in hashmaps, they will be KEYS to the USER INTERFACES (values)
+        - we will also implement the hashCode() method which will be a unique identifier for the Coordinates object using the Objects.hash(x, y) method; this method also has a @Override
+    - create a [IStorage.java](istorage.java) file which contains a interface under the problem domain folder
+        - interface application: design parts of your upfront ahead of time; this is called design by contract (DbC)
+        - use to read from and write to files on operating system; expects to throw IOException
+- ask these questions about our data to best determine how to model it
+    - two great tools to model the data which do not change throughout the runtime of the application:
+        - static final variables and enums
+    - create a new folder under the sudoku folder structure called, constants
+        - create a [GameState.java](gamestate.java) which contains a enum file under the constants folder
+            - this represents all the potential states our game might be in
+                - COMPLETE, ACTIVE, NEW
+        - create a [Messages.java](messages.java) file which contains class under the constants folder
+            - these are the constants messages that will pop up in application
+                - for example, a GAME_COMPLETE static final String that will pop up in a dialog (user interface) after the user wins the game
+                - a ERROR static final String that will pop up when there is an error
+        - create a [Rows.java](rows.java) file which contains enum under the constants folder
+            - helps us for legibility concerns
+            - TOP, MIDDLE, BOTTOM
+
+Every application needs an ENTRY POINT (Application Container)
+
+- we will setup our entry point for our sudoku
+    - create [SudokuApplication.java](sudokuapplication.java) file which contains a SudokuApplication class under the sudoku game folder
+        - this application uses JavaFX so you need to import javafx.application.Application, javafx.fxml.FXMLLoader, javafx.scene.Parent, javafx.scene.Scene, javafx.stage.Stage
+        - this class inherits (extends) from the Application class from javafx
+        - this class will have a property called uiImpl (ui implementation) that references to IUserInterfaceContract.View which is the user interface
+            - this guy likes to prefix (before) UserInterface with the letter I (i)
+            - he also names the instance variable: uiImpl
+        - the Application class comes with a start(Stage primaryStage) method which we will implement
+            - we instantiate the uiImpl
+            - State is a basic window type which JavaFX gives us so that we can modify it
+            - we will also call the SudokuBuildLogic.build(uiImpl) static method, which we will build at the very end
+                - this function contains the build logic which is like the dependency injection type setup
+                - this function could fail so we need to wrap it in a try catch block, which catches IOException if there is an error occuring
+            - we will also need a main method, which will call the launch(args) method
+        - now, we need to figure out how we can import JavaFX into IntelliJ, for myself you need to do that for VSCode
+            - IntelliJ, File → Project Structure → Libraries → Plus button → Java → Select the "lib" folder inside of the javafx-sdk-11.0.2, which you will need to download
+- the [Main.java](main.java) file which contains a Main class is for convenience to be able to launch the application from IntelliJ IDEA
+    - if we don't have this file, when we launch the app, it will crash
+    - inside this file, we will launch our SudokuApplication by instantiating it
+
+Now we are going to build the User Interface for the Sudoku game
+
+- author designs the user interface for the app ahead of time using InVisionApp
+- before we get to implementing the user interface, author likes to design it in a class we will talk to using java Interfaces
+- create a userinterface folder
+    - create a [IUserInterfaceContract.java](iuserinterfacecontract.java) file which contains an interface
+        - watch the working class java video on when to use interfaces vs abstract classes
+        - within this interface, create another interface call EventListener nested within IUserInterfaceContract
+        - we are using IUserInterfaceContract as a namespace or a way to differentiating different interfaces because most user interfaces have a EventListener and View interfaces so this namespace will allow us to point to the one we want
+        - EventListener interface will be a controller / presenter
+        - View interface is like the view from 3 layers software architecture, which is part of the application which binds the user interface
+
+We will build the [main.java](main.java) class properly when we talk about Application Containers
