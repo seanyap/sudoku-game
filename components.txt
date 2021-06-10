@@ -44,6 +44,8 @@ In this lesson, we will build the first few classes for the Sudoku game
             - helps us for legibility concerns
             - TOP, MIDDLE, BOTTOM
 
+We will build the [main.java](main.java) class properly when we talk about Application Containers 
+
 Every application needs an ENTRY POINT (Application Container)
 
 - we will setup our entry point for our sudoku
@@ -78,4 +80,22 @@ Now we are going to build the User Interface for the Sudoku game
         - EventListener interface will be a controller / presenter
         - View interface is like the view from 3 layers software architecture, which is part of the application which binds the user interface
 
-We will build the [main.java](main.java) class properly when we talk about Application Containers
+JavaFX works with four main components from which others derive, these are: Stage, Scene, Node and Layout.
+
+- *Stage*
+
+    Is the central element, acting as a container for all the scenes. Following the analogy with a Theater, is the space where everything happens inside.
+
+- *Scene*
+
+    Is a smaller element that that contains a group of nodes (GUI elements) and contains them.
+
+- *Node*
+
+    Are the elements that compose a scene (buttons, text-boxes, labels, etc…). It is possible and usually the case, nodes have children nodes under their hierarchy, having the ability to nest/be nested.
+
+- *Layout*
+
+    As the name says, it is responsible for defining how the nodes and elements are shown on the screen. JavaFX provides many layout variations, between them we can exemplify:
+
+    - AnchorPane, GridPane, TilePane, BorderPane, FlowPane, ...
