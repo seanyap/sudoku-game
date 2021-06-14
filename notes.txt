@@ -1,8 +1,4 @@
-orange = folder, yellow = class/enum/interface
-
 Java concepts differences `extends` vs `implements` vs `abstract class` 
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f26cdf83-9b0e-4830-b7fa-aee449c6279e/Screen_Shot_2021-06-11_at_6.02.33_PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f26cdf83-9b0e-4830-b7fa-aee449c6279e/Screen_Shot_2021-06-11_at_6.02.33_PM.png)
 
 abstraction(philosophically)
 
@@ -41,13 +37,9 @@ Interface
     - specifically, it allows us to define method, but not its implementation (body)
     - these methods are called "abstract method"
 
-        ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/11817ed3-6590-47a3-8765-9356064a9bd2/Screen_Shot_2021-06-11_at_4.37.41_PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/11817ed3-6590-47a3-8765-9356064a9bd2/Screen_Shot_2021-06-11_at_4.37.41_PM.png)
-
         - the `<T>`(represent type) is a generic type which allows whatever class that implements this interface and its functions to decide what type will be used
         - you can use whatever name you want, as long as its not a reserved keyward like `void` and `new`
 - behavior vs implementation (sharing all parts of the method(access modifier,return type,name,parameter) except body)
-
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8da0701e-9071-4b0c-a21a-0ee5ecc1bcc1/Screen_Shot_2021-06-11_at_4.32.10_PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8da0701e-9071-4b0c-a21a-0ee5ecc1bcc1/Screen_Shot_2021-06-11_at_4.32.10_PM.png)
 
 - isnt this creating extra work for us?
     - no its not because we usually have objects that share the same behavior, but performs it differently (different implementation)
@@ -69,7 +61,7 @@ In this lesson, we will build the first few classes for the Sudoku game
 - these classes are part of the problemdomain folder
     - folder structure so far: src → sudoku → problemdomain
 - first, we will build the **virtual representation** of the sudoku game
-    - create a [SudokuGame.java](http://sudokugame.java) which contains a class under problemdomain folder
+    - create a [SudokuGame.java] which contains a class under problemdomain folder
     - the representation of the game has two properties: gameState and gridState
     - gameState is type ENUM
     - gridState is type 2d integer array
@@ -77,37 +69,37 @@ In this lesson, we will build the first few classes for the Sudoku game
     - getter for the gridState is written to be immutable by duplicating a copy of the original state because if passed the actual address to whichever object that calls it, it will be able to manipulate the actual gridState, which is something we dont want
     - we will later create a static utility function to perform this array copy, which protects the actual sudoku object from being manipulated
     - the SudokuGame class will implement "Serializable" which allows the game to write to an actual file on the operating system
-    - we will also create a [Coordinates.java](http://coordinates.java) which contains a class under the problem domain folder
+    - we will also create a [Coordinates.java] which contains a class under the problem domain folder
         - this class contains 2 private integer field: x and y
         - it will also contains some helpful methods which we will touch on after when we write the user interface
         - also create a constructor to set the private x and y fields and getter methods
         - equals() method to check if coordinates object are equal; this method will have @Override on top of it (research what this does!!)
         - we will store the coordinates object in hashmaps, they will be KEYS to the USER INTERFACES (values)
         - we will also implement the hashCode() method which will be a unique identifier for the Coordinates object using the Objects.hash(x, y) method; this method also has a @Override
-    - create a [IStorage.java](http://istorage.java) file which contains a interface under the problem domain folder
+    - create a [IStorage.java] file which contains a interface under the problem domain folder
         - interface application: design parts of your upfront ahead of time; this is called design by contract (DbC)
         - use to read from and write to files on operating system; expects to throw IOException
 - ask these questions about our data to best determine how to model it
     - two great tools to model the data which do not change throughout the runtime of the application:
         - static final variables and enums
     - create a new folder under the sudoku folder structure called, constants
-        - create a [GameState.java](http://gamestate.java) which contains a enum file under the constants folder
+        - create a [GameState.java] which contains a enum file under the constants folder
             - this represents all the potential states our game might be in
                 - COMPLETE, ACTIVE, NEW
-        - create a [Messages.java](http://messages.java) file which contains class under the constants folder
+        - create a [Messages.java] file which contains class under the constants folder
             - these are the constants messages that will pop up in application
                 - for example, a GAME_COMPLETE static final String that will pop up in a dialog (user interface) after the user wins the game
                 - a ERROR static final String that will pop up when there is an error
-        - create a [Rows.java](http://rows.java) file which contains enum under the constants folder
+        - create a [Rows.java] file which contains enum under the constants folder
             - helps us for legibility concerns
             - TOP, MIDDLE, BOTTOM
 
-We will build the [main.java](http://main.java) class properly when we talk about Application Containers 
+We will build the [main.java] class properly when we talk about Application Containers 
 
 Every application needs an ENTRY POINT (Application Container)
 
 - we will setup our entry point for our sudoku
-    - create [SudokuApplication.java](http://sudokuapplication.java) file which contains a SudokuApplication class under the sudoku game folder
+    - create [SudokuApplication.java] file which contains a SudokuApplication class under the sudoku game folder
         - this application uses JavaFX so you need to import javafx.application.Application, javafx.fxml.FXMLLoader, javafx.scene.Parent, javafx.scene.Scene, javafx.stage.Stage
         - this class inherits (extends) from the Application class from javafx
         - this class will have a property called uiImpl (ui implementation) that references to IUserInterfaceContract.View which is the user interface
@@ -122,7 +114,7 @@ Every application needs an ENTRY POINT (Application Container)
             - we will also need a main method, which will call the launch(args) method
         - now, we need to figure out how we can import JavaFX into IntelliJ, for myself you need to do that for VSCode
             - IntelliJ, File → Project Structure → Libraries → Plus button → Java → Select the "lib" folder inside of the javafx-sdk-11.0.2, which you will need to download
-- the [Main.java](http://main.java) file which contains a Main class is for convenience to be able to launch the application from IntelliJ IDEA
+- the [Main.java] file which contains a Main class is for convenience to be able to launch the application from IntelliJ IDEA
     - if we don't have this file, when we launch the app, it will crash
     - inside this file, we will launch our SudokuApplication by instantiating it
 
@@ -131,16 +123,16 @@ Now we are going to build the User Interface for the Sudoku game
 - author designs the user interface for the app ahead of time using InVisionApp
 - before we get to implementing the user interface, author likes to design it in a class we will talk to using java Interfaces
 - create a userinterface folder
-    - create a [IUserInterfaceContract.java](http://iuserinterfacecontract.java) file which contains an interface
+    - create a [IUserInterfaceContract.java] file which contains an interface
         - watch the working class java video on when to use interfaces vs abstract classes
         - within this interface, create another interface call EventListener nested within IUserInterfaceContract
         - we are using IUserInterfaceContract as a namespace or a way to differentiating different interfaces because most user interfaces have a EventListener and View interfaces so this namespace will allow us to point to the one we want
         - EventListener interface will be a controller / presenter
         - View interface is like the view from 3 layers software architecture, which is part of the application which binds the user interface
-    - create a [SudokuTextField.java](http://sudokutextfield.java) file which extends the TextField class from javafx, not java.awt
+    - create a [SudokuTextField.java] file which extends the TextField class from javafx, not java.awt
         - maintains the x and y coordinates with constructor and getter methods (use intellij auto complete feature menu)
         - override two method from the parent class
-    - create a [UserInterfaceImpl.java](http://userinterfaceimpl.java) file
+    - create a [UserInterfaceImpl.java] file
         - in this file, we will build the user interface code
         - implements (extend) IUserInterfaceContract.View and EventHandler<KeyEvent>
         - properties: Stage (the background window), Group (like a div)
@@ -170,3 +162,7 @@ JavaFX works with four main components from which others derive, these are: Stag
     As the name says, it is responsible for defining how the nodes and elements are shown on the screen. JavaFX provides many layout variations, between them we can exemplify:
 
     - AnchorPane, GridPane, TilePane, BorderPane, FlowPane, ...
+- helpful Javafx links
+    - [https://medium.com/@rafaelgurgel/javafx-basic-concepts-9b40c271e78a](https://medium.com/@rafaelgurgel/javafx-basic-concepts-9b40c271e78a)
+    - [https://www.baeldung.com/javafx](https://www.baeldung.com/javafx)
+    - [https://medium.com/@gabriellamedas/my-first-gui-application-with-javafx-3908b843abd8](https://medium.com/@gabriellamedas/my-first-gui-application-with-javafx-3908b843abd8)
