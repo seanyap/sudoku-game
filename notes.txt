@@ -1,4 +1,8 @@
+orange = folder, yellow = class/enum/interface
+
 Java concepts differences `extends` vs `implements` vs `abstract class` 
+
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f26cdf83-9b0e-4830-b7fa-aee449c6279e/Screen_Shot_2021-06-11_at_6.02.33_PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f26cdf83-9b0e-4830-b7fa-aee449c6279e/Screen_Shot_2021-06-11_at_6.02.33_PM.png)
 
 abstraction(philosophically)
 
@@ -37,9 +41,13 @@ Interface
     - specifically, it allows us to define method, but not its implementation (body)
     - these methods are called "abstract method"
 
+        ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/11817ed3-6590-47a3-8765-9356064a9bd2/Screen_Shot_2021-06-11_at_4.37.41_PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/11817ed3-6590-47a3-8765-9356064a9bd2/Screen_Shot_2021-06-11_at_4.37.41_PM.png)
+
         - the `<T>`(represent type) is a generic type which allows whatever class that implements this interface and its functions to decide what type will be used
         - you can use whatever name you want, as long as its not a reserved keyward like `void` and `new`
 - behavior vs implementation (sharing all parts of the method(access modifier,return type,name,parameter) except body)
+
+    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8da0701e-9071-4b0c-a21a-0ee5ecc1bcc1/Screen_Shot_2021-06-11_at_4.32.10_PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8da0701e-9071-4b0c-a21a-0ee5ecc1bcc1/Screen_Shot_2021-06-11_at_4.32.10_PM.png)
 
 - isnt this creating extra work for us?
     - no its not because we usually have objects that share the same behavior, but performs it differently (different implementation)
@@ -145,19 +153,19 @@ Now we are going to build the User Interface for the Sudoku game
 
 JavaFX works with four main components from which others derive, these are: Stage, Scene, Node and Layout.
 
-- *Stage*
+- Stage
 
     Is the central element, acting as a container for all the scenes. Following the analogy with a Theater, is the space where everything happens inside.
 
-- *Scene*
+- Scene
 
     Is a smaller element that that contains a group of nodes (GUI elements) and contains them.
 
-- *Node*
+- Node
 
     Are the elements that compose a scene (buttons, text-boxes, labels, etc…). It is possible and usually the case, nodes have children nodes under their hierarchy, having the ability to nest/be nested.
 
-- *Layout*
+- Layout
 
     As the name says, it is responsible for defining how the nodes and elements are shown on the screen. JavaFX provides many layout variations, between them we can exemplify:
 
